@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3.2.21/dist/vue.global.prod.js"></script>
+
+    <title>Vue 3 Concepts</title>
+
+    <style>
+        body {
+            background-color: #b4c2ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vue 3 Concepts</h1>
+
+    <h2>Part A:</h2>
+
+    <div id="newApp">
+        <p v-if="deakinStatus">I do not attend Deakin University</p>
+        <p v-else>Kidding, I attend Deakin University :)</p>
+
+        <button @click="revealBtn">Click to Reveal</button>
+
+        <p> </p>
+
+        <div v-show="isVisible">This text is inside a hidden div, click the button again to untoggle this text!</div>
+    </div>
+
+    <h2>Part B: </h2>
+
+    <div id="app">
+        <div>Selected Names: {{ nameChecker }}</div>
+
+        <input type="checkbox" id="digby" value="Digby" v-model="nameChecker">
+        <label for="digby">Digby</label>
+        <input type="checkbox" id="james" value="James" v-model="nameChecker">
+        <label for="james">James</label>
+        <input type="checkbox" id="michael" value="Michael" v-model="nameChecker">
+        <label for="michael">Michael</label>
+    </div>
+
+
+  <script>
+    const newApp = Vue.createApp({
+        data() {
+            return {
+                deakinStatus: true,
+                isVisible: false,
+            };
+        },
+        methods: {
+            revealBtn() {
+                this.deakinStatus = !this.deakinStatus;
+                this.isVisible =!this.isVisible;
+            }
+        }
+    
+    });
+    newApp.mount('#newApp');
+
+    const app = Vue.createApp({
+      setup() {
+        const nameChecker = Vue.ref([]);
+        return { nameChecker };
+      }
+    });
+    app.mount('#app');
+  </script>
+
+</body>
+</html>
